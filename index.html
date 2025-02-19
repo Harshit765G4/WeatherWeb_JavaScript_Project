@@ -39,10 +39,15 @@
     <script>
         
         const apiKey="5f9e2da9962804584f7449b59a9dc695";
-        const apiUrl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=panipat";
+        const apiUrl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-        async function checkWeather(){
-            const response = await fetch(apiUrl + `&appid=${apiKey}`);
+
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+
+
+        async function checkWeather(city){
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
 
             var data = await response.json();
 
@@ -56,6 +61,10 @@
 
 
         }
+
+        searchBtn.addEventListener("click", function(){
+            checkWeather(searchBox.value);
+        });
 
         checkWeather();
         
